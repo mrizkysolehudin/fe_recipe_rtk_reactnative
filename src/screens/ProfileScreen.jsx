@@ -1,21 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import BottomTabs from '../components/Global/BottomTabs';
-import {dataUser} from '../dummy/User';
 import {colors} from '../assets/style/colors';
 import {Button} from 'native-base';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {logoutAction} from '../redux/slices/auth/authSlice';
+import {getOneUserAction} from '../redux/slices/user/getOneUser';
 
 const ProfileScreen = ({route, navigation}) => {
   const openTab = route.name || 'Profile';
   const dispatch = useDispatch();
+  const {user_id} = useSelector(state => state.userAuth);
+  const {data} = useSelector(state => state.getOneUser);
 
-  const item = dataUser;
+  useEffect(() => {
+    dispatch(getOneUserAction(user_id));
+  }, [user_id]);
 
   return (
     <View style={{position: 'relative', height: '100%'}}>
@@ -31,7 +35,7 @@ const ProfileScreen = ({route, navigation}) => {
         }}>
         <Image
           style={{height: 84, width: 84, borderRadius: 999}}
-          source={{uri: `${item.photo}`}}
+          source={{uri: `${data?.photo}`}}
           alt="user"
         />
         <Text
@@ -41,7 +45,7 @@ const ProfileScreen = ({route, navigation}) => {
             fontWeight: '700',
             marginTop: 20,
           }}>
-          {item.name}
+          {data?.name}
         </Text>
       </View>
 

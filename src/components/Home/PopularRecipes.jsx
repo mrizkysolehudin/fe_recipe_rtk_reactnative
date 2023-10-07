@@ -3,6 +3,7 @@ import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import CardItemPopularRecipes from './CardItemPopularRecipes';
 import Alert from '../Global/Alert';
+import NoResult from '../Global/NoResult';
 
 const PopularRecipes = ({data, handlePress, isLoading}) => {
   return (

@@ -7,14 +7,11 @@ import PopularRecipes from '../components/Home/PopularRecipes';
 import SearchInput from '../components/Home/SearchInput';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAllRecipesAction} from '../redux/slices/recipe/allRecipes';
-import {ScrollView, Text, View} from 'native-base';
 
 const HomeScreenTes = ({route, navigation}) => {
   const openTab = route.name || 'Home';
   const dispatch = useDispatch();
   const {data: dataRecipe, isLoading} = useSelector(state => state.allRecipes);
-  console.log(dataRecipe);
-  console.log('lod', isLoading);
 
   const [searchTerm, setSearchTerm] = useState('');
 
