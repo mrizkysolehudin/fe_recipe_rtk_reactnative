@@ -1,12 +1,5 @@
-import React, {useEffect} from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -14,9 +7,13 @@ import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import BottomTabs from '../components/Global/BottomTabs';
 import {dataUser} from '../dummy/User';
 import {colors} from '../assets/style/colors';
+import {Button} from 'native-base';
+import {useDispatch} from 'react-redux';
+import {logoutAction} from '../redux/slices/auth/authSlice';
 
 const ProfileScreen = ({route, navigation}) => {
   const openTab = route.name || 'Profile';
+  const dispatch = useDispatch();
 
   const item = dataUser;
 
@@ -123,6 +120,14 @@ const ProfileScreen = ({route, navigation}) => {
             size={25}
           />
         </TouchableOpacity>
+
+        <Button
+          onPress={() => dispatch(logoutAction())}
+          mt={7}
+          bgColor={'#f44336'}
+          fontWeight={'extrabold'}>
+          Logout
+        </Button>
       </View>
 
       <BottomTabs openTab={openTab} />

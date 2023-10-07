@@ -11,13 +11,17 @@ import EditProfileScreen from '../screens/EditProfileScreen';
 import MyRecipesScreen from '../screens/MyRecipesScreen';
 import SavedRecipeScreen from '../screens/SavedRecipeScreen';
 import LikedRecipeScreen from '../screens/LikedRecipe';
+import {useSelector} from 'react-redux';
+import PrivateRoute from '../components/Global/PrivateRoute';
 
 const Stack = createStackNavigator();
 
 const Routes = () => {
+  const {token} = useSelector(state => state.userAuth);
+
   useEffect(() => {
     SplashScreen.hide();
-  }, []);
+  }, [token]);
 
   return (
     <NavigationContainer>
@@ -57,6 +61,25 @@ const Routes = () => {
             headerShown: false,
           }}
         />
+
+        <Stack.Screen
+          name="Register"
+          component={RegisterScreen}
+          options={{
+            headerTitle: '',
+            headerStyle: {
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            },
+          }}
+        />
+
+        <Stack.Screen
+          name="Profile"
+          options={{
+            headerShown: false,
+          }}>
+          {props => <PrivateRoute {...props} component={ProfileScreen} />}
+        </Stack.Screen>
         <Stack.Screen
           name="RecipeDetails"
           component={RecipeDetailsScreen}
@@ -70,31 +93,6 @@ const Routes = () => {
           component={HomeScreen}
           options={{
             headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
-
-        {/* <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
-        <Stack.Screen
-          name="Register"
-          component={RegisterScreen}
-          options={{
-            headerTitle: '',
-            headerStyle: {
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-            },
           }}
         />
       </Stack.Navigator>

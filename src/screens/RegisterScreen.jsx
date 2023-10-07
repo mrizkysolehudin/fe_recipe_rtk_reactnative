@@ -1,10 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, Input, Text, View} from 'native-base';
 import {StyleSheet, TextInput, TouchableHighlight} from 'react-native';
 import {colors} from '../assets/style/colors';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import {useSelector} from 'react-redux';
 
 const RegisterScreen = ({navigation}) => {
+  const {token} = useSelector(state => state.userAuth);
+
+  console.log(token);
+
+  useEffect(() => {
+    if (token) {
+      navigation.navigate('Home');
+    }
+  }, [token]);
+
   return (
     <View style={styles.container}>
       <Text

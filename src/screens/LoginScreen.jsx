@@ -1,39 +1,33 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Image, Input, Text, View} from 'native-base';
 import {StyleSheet, TouchableHighlight} from 'react-native';
 import {colors} from '../assets/style/colors';
 import icon_user from '../assets/icons/icon_user.png';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import axios from 'axios';
-import {REACT_APP_BACKEND_URL} from '../../env';
+import {useDispatch, useSelector} from 'react-redux';
+import {loginAction} from '../redux/slices/auth/authSlice';
 
 const LoginScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+  const {token} = useSelector(state => state.userAuth);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    if (email === '' || password === '') {
-      console.log('Input is empty');
-      return;
-    }
-
-    const data = {
+    let data = {
       email,
       password,
     };
 
-    navigation.navigate('Home');
-
-    axios
-      .post(`${REACT_APP_BACKEND_URL}/users/login`, data)
-      .then(response => {
-        console.log(response);
-        navigation.navigate('Home');
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    dispatch(loginAction({data, navigation}));
   };
+
+  useEffect(() => {
+    if (token) {
+      navigation.navigate('Home');
+    }
+  }, [token]);
 
   return (
     <View style={styles.container}>
