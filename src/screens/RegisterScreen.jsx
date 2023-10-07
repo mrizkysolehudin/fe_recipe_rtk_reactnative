@@ -1,20 +1,38 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Input, Text, View} from 'native-base';
-import {StyleSheet, TextInput, TouchableHighlight} from 'react-native';
+import {StyleSheet, TouchableHighlight} from 'react-native';
 import {colors} from '../assets/style/colors';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {addUserAction} from '../redux/slices/user/addUserSlice';
 
 const RegisterScreen = ({navigation}) => {
+  const dispatch = useDispatch();
   const {token} = useSelector(state => state.userAuth);
 
-  console.log(token);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   useEffect(() => {
     if (token) {
       navigation.navigate('Home');
     }
   }, [token]);
+
+  const handleSubmit = async () => {
+    let data = {
+      name,
+      email,
+      phone,
+      password,
+      confirmPassword,
+    };
+
+    dispatch(addUserAction({data, navigation}));
+  };
 
   return (
     <View style={styles.container}>
@@ -44,6 +62,8 @@ const RegisterScreen = ({navigation}) => {
           placeholder="Name"
           placeholderTextColor={colors.primary}
           autoComplete="name"
+          value={name}
+          onChangeText={setName}
           InputLeftElement={
             <FeatherIcon
               name="user"
@@ -62,6 +82,8 @@ const RegisterScreen = ({navigation}) => {
           placeholder="E-Mail"
           placeholderTextColor={colors.primary}
           autoComplete="email"
+          value={email}
+          onChangeText={setEmail}
           InputLeftElement={
             <FeatherIcon
               name="mail"
@@ -80,6 +102,8 @@ const RegisterScreen = ({navigation}) => {
           placeholder="Phone Number"
           placeholderTextColor={colors.primary}
           secureTextEntry={true}
+          value={phone}
+          onChangeText={setPhone}
           InputLeftElement={
             <FeatherIcon
               name="phone"
@@ -99,6 +123,8 @@ const RegisterScreen = ({navigation}) => {
           placeholderTextColor={colors.primary}
           autoComplete="password"
           secureTextEntry={true}
+          value={password}
+          onChangeText={setPassword}
           InputLeftElement={
             <FeatherIcon
               name="lock"
@@ -118,6 +144,8 @@ const RegisterScreen = ({navigation}) => {
           placeholderTextColor={colors.primary}
           autoComplete="password"
           secureTextEntry={true}
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
           InputLeftElement={
             <FeatherIcon
               name="unlock"
@@ -130,6 +158,7 @@ const RegisterScreen = ({navigation}) => {
       </View>
 
       <Button
+        onPress={() => handleSubmit()}
         style={{
           backgroundColor: colors.yellow,
           padding: 10,
