@@ -1,20 +1,33 @@
 import {SafeAreaView, SectionList, StyleSheet} from 'react-native';
-import React, {useState} from 'react';
-import {dataRecipes} from '../dummy/recipes';
+import React, {useState, useEffect} from 'react';
 import BottomTabs from '../components/Global/BottomTabs';
 import PopularForYouSection from '../components/Home/PopularForYouSection';
 import NewRecipeSection from '../components/Home/NewRecipeSection';
 import PopularRecipes from '../components/Home/PopularRecipes';
 import SearchInput from '../components/Home/SearchInput';
-// import axios from 'axios';
-// import {REACT_APP_BACKEND_URL} from '../../env';
-// import {View, Text} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {getAllRecipesAction} from '../redux/slices/recipe/allRecipes';
+import {ScrollView, Text, View} from 'native-base';
 
-const HomeScreen = ({route, navigation}) => {
+const HomeScreenTes = ({route, navigation}) => {
   const openTab = route.name || 'Home';
-  // const [dataCoba, setDataCoba] = useState([]);
+  const dispatch = useDispatch();
+  const {data: dataRecipe, isLoading} = useSelector(state => state.allRecipes);
+  console.log(dataRecipe);
+  console.log('lod', isLoading);
 
-  const data = dataRecipes.data;
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const data = dataRecipe;
+
+  const handlePress = id => {
+    navigation.navigate('RecipeDetails', {id});
+  };
+
+  useEffect(() => {
+    dispatch(getAllRecipesAction(searchTerm));
+  }, [dispatch]);
+
   const sections = [
     {title: 'SearchInput', data: [1]},
     {title: 'PopularForYouSection', data: [2]},
@@ -22,26 +35,8 @@ const HomeScreen = ({route, navigation}) => {
     {title: 'PopularRecipes', data: [4]},
   ];
 
-  const handlePress = id => {
-    navigation.navigate('RecipeDetails', {id});
-  };
-
-  // React.useEffect(() => {
-  //   axios.get(`${REACT_APP_BACKEND_URL}/recipe`).then(response => {
-  //     setDataCoba(response.data);
-  //   });
-  // }, []);
-
-  // console.log(dataCoba?.data && dataCoba?.data[0]?.title);
-
   return (
     <SafeAreaView style={styles.container}>
-      {/* <View style={{backgroundColor: 'blue', height: 80}}>
-        <Text style={{color: 'white', fontSize: 30}}>
-          {dataCoba?.data && dataCoba?.data[0]?.title}
-        </Text>
-      </View> */}
-
       <SectionList
         sections={sections}
         keyExtractor={(item, index) => index.toString()}
@@ -52,9 +47,21 @@ const HomeScreen = ({route, navigation}) => {
             case 'PopularForYouSection':
               return <PopularForYouSection />;
             case 'NewRecipeSection':
-              return <NewRecipeSection data={data} handlePress={handlePress} />;
+              return (
+                <NewRecipeSection
+                  data={data}
+                  isLoading={isLoading}
+                  handlePress={handlePress}
+                />
+              );
             case 'PopularRecipes':
-              return <PopularRecipes data={data} handlePress={handlePress} />;
+              return (
+                <PopularRecipes
+                  data={data}
+                  isLoading={isLoading}
+                  handlePress={handlePress}
+                />
+              );
             default:
               return null;
           }
@@ -66,7 +73,7 @@ const HomeScreen = ({route, navigation}) => {
   );
 };
 
-export default HomeScreen;
+export default HomeScreenTes;
 
 const styles = StyleSheet.create({
   container: {
