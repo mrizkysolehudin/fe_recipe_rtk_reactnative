@@ -20,7 +20,7 @@ const Pagination = ({pagination, setPage, page}) => {
     <View
       style={{
         position: 'absolute',
-        bottom: 150,
+        bottom: -60,
         width: '100%',
       }}>
       <View

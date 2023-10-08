@@ -83,6 +83,7 @@ const SearchRecipeScreen = ({route, navigation}) => {
       <View
         style={{
           paddingLeft: 28,
+          minHeight: '58%',
         }}>
         {isLoading ? (
           <Alert type={'loading'} />
@@ -99,7 +100,9 @@ const SearchRecipeScreen = ({route, navigation}) => {
         )}
       </View>
 
-      <Pagination pagination={pagination} setPage={setPage} page={page} />
+      <View>
+        <Pagination pagination={pagination} setPage={setPage} page={page} />
+      </View>
       <BottomTabs />
     </View>
   );
