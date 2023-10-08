@@ -1,14 +1,50 @@
 import {View, Text, TouchableOpacity, FlatList} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import {dataRecipes} from '../dummy/recipes';
 import CardItem from '../components/MyRecipes/CardItem';
+import {useDispatch, useSelector} from 'react-redux';
+import NoResult from '../components/Global/NoResult';
+import Alert from '../components/Global/Alert';
+import {REACT_NATIVE_BACKEND_URL} from '../../env';
+import http from '../helpers/http';
+import {deleteRecipeAction} from '../redux/slices/recipe/deleteRecipe';
 
 const MyRecipesScreen = ({navigation}) => {
-  const data = dataRecipes.data;
+  const dispatch = useDispatch();
+  const {user_id} = useSelector(state => state.userAuth);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [dataUserRecipes, setDataUserRecipes] = useState([]);
 
   const handlePress = id => {
     navigation.navigate('RecipeDetails', {id});
+  };
+
+  useEffect(() => {
+    getUserRecipes(user_id);
+  }, [user_id, dispatch]);
+
+  const getUserRecipes = async id => {
+    setIsLoading(true);
+
+    try {
+      const response = await http().get(
+        `${REACT_NATIVE_BACKEND_URL}/recipe/user-recipes/${id}`,
+      );
+
+      setDataUserRecipes(response?.data?.data);
+      setIsLoading(false);
+    } catch (error) {
+      setIsError(true);
+      setIsLoading(false);
+    }
+  };
+
+  const handleDelete = async recipeId => {
+    dispatch(
+      deleteRecipeAction({id: recipeId, onRefresh: getUserRecipes, user_id}),
+    );
   };
 
   return (
@@ -59,15 +95,28 @@ const MyRecipesScreen = ({navigation}) => {
         style={{
           width: '86%',
         }}>
-        <FlatList
-          data={data}
-          renderItem={({item}) => (
-            <CardItem item={item} handlePress={handlePress} />
-          )}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item, index) => index.toString()}
-          ListFooterComponent={<View style={{height: 30}} />}
-        />
+        {isLoading ? (
+          <Alert type="loading" />
+        ) : isError ? (
+          <Alert type="error" />
+        ) : dataUserRecipes?.length > 0 ? (
+          <FlatList
+            data={dataUserRecipes}
+            renderItem={({item}) => (
+              <CardItem
+                item={item}
+                handlePress={handlePress}
+                withActionButton
+                handleDelete={handleDelete}
+              />
+            )}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item, index) => index.toString()}
+            ListFooterComponent={<View style={{height: 30}} />}
+          />
+        ) : (
+          <NoResult />
+        )}
       </View>
     </View>
   );

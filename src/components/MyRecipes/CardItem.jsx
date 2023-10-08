@@ -1,10 +1,16 @@
-import {Image, Text, View} from 'native-base';
+import {Button, Image, Text, View} from 'native-base';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 
-const CardItem = ({item, handlePress}) => {
+const CardItem = ({item, handlePress, withActionButton, handleDelete}) => {
   return (
-    <TouchableOpacity onPress={() => handlePress(item?.recipe_id)}>
+    <TouchableOpacity
+      onPress={() => handlePress(item?.recipe_id)}
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}>
       <View
         style={{
           flexDirection: 'row',
@@ -38,6 +44,22 @@ const CardItem = ({item, handlePress}) => {
           </Text>
         </View>
       </View>
+
+      {withActionButton && (
+        <View style={{gap: 4}}>
+          <Button bgColor="#0284c7" py={1} fontWeight={'bold'}>
+            Edit
+          </Button>
+          <Button
+            onPress={() => handleDelete(item?.recipe_id)}
+            bgColor="#dc2626"
+            py={1}
+            px={2}
+            fontWeight={'bold'}>
+            Delete
+          </Button>
+        </View>
+      )}
     </TouchableOpacity>
   );
 };
