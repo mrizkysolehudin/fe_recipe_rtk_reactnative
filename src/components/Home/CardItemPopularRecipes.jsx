@@ -16,7 +16,7 @@ const CardItemPopularRecipes = ({item, handlePress}) => {
           source={{uri: item.image}}
           alt="recipe"
         />
-        <View style={{marginTop: 5, marginLeft: 10}}>
+        <View style={{marginLeft: 10}}>
           <Text style={{fontSize: 16}}>{item.title}</Text>
 
           <Text style={{fontSize: 12, color: '#B6B6B6', marginTop: 8}}>

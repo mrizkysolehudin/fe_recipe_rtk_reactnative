@@ -1,10 +1,23 @@
 import {View} from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Input} from 'native-base';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../../assets/style/colors';
+import {useNavigation} from '@react-navigation/native';
 
-const SearchInput = () => {
+const SearchInput = ({params}) => {
+  const navigation = useNavigation();
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = () => {
+    navigation.navigate(`SearchRecipe`, {search: searchTerm});
+  };
+
+  useEffect(() => {
+    setSearchTerm(params);
+  }, []);
+
   return (
     <View style={{alignItems: 'center', marginTop: 16}}>
       <Input
@@ -13,6 +26,9 @@ const SearchInput = () => {
         borderRadius={10}
         borderColor={'transparent'}
         backgroundColor="#EFEFEF"
+        onChangeText={setSearchTerm}
+        value={searchTerm}
+        onSubmitEditing={handleSearch}
         InputLeftElement={
           <IonIcon
             style={{marginTop: 2, marginLeft: 20}}

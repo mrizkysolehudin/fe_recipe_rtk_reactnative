@@ -56,16 +56,17 @@ const BottomTabs = () => {
           style={[
             styles.icon,
             {
-              backgroundColor: openTab === 'Chat' ? colors.yellow : 'white',
+              backgroundColor:
+                openTab === 'SearchRecipe' ? colors.yellow : 'white',
             },
           ]}
           onPress={() => {
-            // setOpenTab('Chat');
-            // navigation.navigate('Chat');
+            // setOpenTab('Search');
+            navigation.navigate('SearchRecipe');
           }}>
           <IonIcon
-            name="chatbubble-outline"
-            color={openTab === 'Chat' ? 'white' : colors.grayishBlue}
+            name="search"
+            color={openTab === 'SearchRecipe' ? 'white' : colors.grayishBlue}
             size={24}
           />
         </TouchableOpacity>

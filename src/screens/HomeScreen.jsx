@@ -4,7 +4,7 @@ import BottomTabs from '../components/Global/BottomTabs';
 import PopularForYouSection from '../components/Home/PopularForYouSection';
 import NewRecipeSection from '../components/Home/NewRecipeSection';
 import PopularRecipes from '../components/Home/PopularRecipes';
-import SearchInput from '../components/Home/SearchInput';
+import SearchInput from '../components/Global/SearchInput';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAllRecipesAction} from '../redux/slices/recipe/allRecipes';
 
