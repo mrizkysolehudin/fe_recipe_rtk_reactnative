@@ -47,6 +47,7 @@ const Pagination = ({pagination, setPage, page}) => {
               borderColor={'gray.200'}
               borderWidth={1}
               h={10}
+              onPress={() => setPage(pageNumber)}
               key={index}>
               <Text
                 style={{

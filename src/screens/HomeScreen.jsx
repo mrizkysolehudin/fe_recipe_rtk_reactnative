@@ -7,6 +7,7 @@ import PopularRecipes from '../components/Home/PopularRecipes';
 import SearchInput from '../components/Global/SearchInput';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAllRecipesAction} from '../redux/slices/recipe/allRecipes';
+import {LogLevel, OneSignal} from 'react-native-onesignal';
 
 const HomeScreenTes = ({route, navigation}) => {
   const openTab = route.name || 'Home';
@@ -31,6 +32,18 @@ const HomeScreenTes = ({route, navigation}) => {
     {title: 'NewRecipeSection', data: [3]},
     {title: 'PopularRecipes', data: [4]},
   ];
+
+  useEffect(() => {
+    OneSignal.Debug.setLogLevel(LogLevel.Verbose);
+
+    OneSignal.initialize('d04fbb2f-d6e6-46c3-b695-740f97f34687');
+
+    OneSignal.Notifications.requestPermission(true);
+
+    OneSignal.Notifications.addEventListener('click', event => {
+      console.log('OneSignal: notification clicked:', event);
+    });
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

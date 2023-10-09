@@ -97,7 +97,6 @@ const AddRecipeScreen = () => {
       </View>
 
       <Button
-        onPress={() => handleSubmit()}
         style={{
           backgroundColor: colors.yellow,
           padding: 10,
