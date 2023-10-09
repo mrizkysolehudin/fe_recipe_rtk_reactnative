@@ -14,6 +14,7 @@ import LikedRecipeScreen from '../screens/LikedRecipe';
 import {useSelector} from 'react-redux';
 import PrivateRoute from '../components/Global/PrivateRoute';
 import SearchRecipeScreen from '../screens/SearchRecipeScreen';
+import AddRecipeScreen from '../screens/AddRecipe';
 
 const Stack = createStackNavigator();
 
@@ -37,6 +38,13 @@ const Routes = () => {
         <Stack.Screen
           name="EditProfile"
           component={EditProfileScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="AddRecipe"
+          component={AddRecipeScreen}
           options={{
             headerShown: false,
           }}

@@ -44,7 +44,7 @@ const BottomTabs = () => {
           ]}
           onPress={() => {
             // setOpenTab('AddRecipe');
-            // navigation.navigate('AddRecipe');
+            navigation.navigate('AddRecipe');
           }}>
           <FeatherIcon
             name="plus-square"
