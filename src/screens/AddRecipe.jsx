@@ -1,15 +1,58 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Input, Text, TextArea, View} from 'native-base';
+import {Button, Image, Input, Text, TextArea, View} from 'native-base';
 import {StyleSheet, SafeAreaView} from 'react-native';
 import {colors} from '../assets/style/colors';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import BottomTabs from '../components/Global/BottomTabs';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import {addRecipeAction} from '../redux/slices/recipe/addRecipeSlice';
+import {useDispatch} from 'react-redux';
+import {launchImageLibrary} from 'react-native-image-picker';
 
-const AddRecipeScreen = () => {
+const AddRecipeScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [video, setVideo] = useState('');
+  const [image, setImage] = useState(null);
+  const [showImage, setShowImage] = useState('');
+
+  const handleSubmit = async () => {
+    let data = {
+      title,
+      ingredients,
+      video,
+      image: {
+        uri: image.uri ?? '',
+        type: image.type ?? '',
+        name: image.fileName ?? '',
+        fileSize: image.fileSize ?? '',
+      },
+    };
+
+    dispatch(addRecipeAction({data, navigation}));
+  };
+
+  const handleOpenGallery = () => {
+    const options = {
+      mediaType: 'photo',
+      quality: 1,
+    };
+
+    launchImageLibrary(options, response => {
+      if (response.didCancel) {
+        console.log('user cancelled');
+      } else if (response.error) {
+        console.log('launchImageLibrary Error: ', response.error);
+      } else {
+        const data = response.assets[0];
+        console.log(data);
+        setImage(data);
+      }
+    });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -46,7 +89,7 @@ const AddRecipeScreen = () => {
         <TextArea
           rounded={10}
           fontSize={12}
-          h={200}
+          h={100}
           bgColor={'white'}
           borderColor={'transparent'}
           placeholder="Ingredients"
@@ -62,7 +105,6 @@ const AddRecipeScreen = () => {
           borderColor={'transparent'}
           placeholder="Add Video"
           placeholderTextColor={colors.primary}
-          secureTextEntry={true}
           value={video}
           onChangeText={setVideo}
           InputLeftElement={
@@ -75,28 +117,82 @@ const AddRecipeScreen = () => {
           }
         />
 
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={{
-            backgroundColor: 'white',
-            borderRadius: 10,
-            elevation: 1,
-            borderColor: colors.darkPrimary,
-            borderWidth: 1,
-          }}>
-          <Text
+        <View style={{position: 'relative'}}>
+          <View
             style={{
-              paddingVertical: 15,
-              textAlign: 'center',
-              fontSize: 15,
-              color: colors.darkPrimary,
+              height: 100,
+              backgroundColor: image.uri ? 'transparent' : 'white',
+              borderRadius: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
             }}>
-            Add Image
-          </Text>
-        </TouchableOpacity>
+            <MaterialIcon
+              name="insert-photo"
+              size={20}
+              color={colors.primary}
+            />
+            <Text style={{color: colors.darkPrimary}}>Add Photo</Text>
+          </View>
+
+          {image?.uri && (
+            <Image
+              source={{uri: `${image?.uri}`}}
+              width={'100%'}
+              height={'100%'}
+              style={{position: 'absolute', objectFit: 'contain'}}
+            />
+          )}
+
+          <TouchableOpacity
+            onPress={handleOpenGallery}
+            style={{
+              position: 'absolute',
+              height: 100,
+              borderRadius: 10,
+              bottom: 0,
+              width: '100%',
+            }}></TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            width: '100%',
+            justifyContent: 'center',
+            gap: 20,
+          }}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={{
+              backgroundColor: colors.grayishBlue,
+              borderRadius: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+              elevation: 3,
+              paddingVertical: 10,
+              marginLeft: '10%',
+            }}>
+            <Text style={{color: 'white', fontWeight: 900}}>Select Image</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={{
+              backgroundColor: colors.grayishBlue,
+              borderRadius: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+              elevation: 3,
+              paddingVertical: 10,
+              marginLeft: '10%',
+            }}>
+            <MaterialIcon name="photo-camera" size={20} color={'white'} />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <Button
+        onPress={() => handleSubmit()}
         style={{
           backgroundColor: colors.yellow,
           padding: 10,

@@ -104,6 +104,7 @@ const SearchRecipeScreen = ({route, navigation}) => {
           <Pagination pagination={pagination} setPage={setPage} page={page} />
         </View>
       )}
+
       <BottomTabs />
     </View>
   );
