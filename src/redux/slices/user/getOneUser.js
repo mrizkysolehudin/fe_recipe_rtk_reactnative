@@ -10,6 +10,9 @@ export const getOneUserAction = createAsyncThunk(
         `${REACT_NATIVE_BACKEND_URL}/users/${id}`,
       );
 
+      delete response.data.data[0].password;
+      delete response.data.data[0].confirmpassword;
+
       return response.data.data[0];
     } catch (error) {
       return rejectWithValue(error.message);

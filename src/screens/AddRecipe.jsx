@@ -121,7 +121,7 @@ const AddRecipeScreen = ({navigation}) => {
           h={60}
           bgColor={'white'}
           borderColor={'transparent'}
-          placeholder="Add Video"
+          placeholder="Add Link Youtube"
           placeholderTextColor={colors.primary}
           value={video}
           onChangeText={setVideo}
@@ -155,6 +155,7 @@ const AddRecipeScreen = ({navigation}) => {
           {image?.uri && (
             <Image
               source={{uri: `${image?.uri}`}}
+              alt="recipe"
               width={'100%'}
               height={'100%'}
               style={{position: 'absolute', objectFit: 'contain'}}
