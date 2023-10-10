@@ -14,8 +14,6 @@ const HomeScreenTes = ({route, navigation}) => {
   const dispatch = useDispatch();
   const {data: dataRecipe, isLoading} = useSelector(state => state.allRecipes);
 
-  const [searchTerm, setSearchTerm] = useState('');
-
   const data = dataRecipe;
 
   const handlePress = id => {
@@ -23,7 +21,7 @@ const HomeScreenTes = ({route, navigation}) => {
   };
 
   useEffect(() => {
-    dispatch(getAllRecipesAction(searchTerm));
+    dispatch(getAllRecipesAction(''));
   }, [dispatch]);
 
   const sections = [
@@ -44,6 +42,8 @@ const HomeScreenTes = ({route, navigation}) => {
       console.log('OneSignal: notification clicked:', event);
     });
   }, []);
+
+  console.log(data);
 
   return (
     <SafeAreaView style={styles.container}>

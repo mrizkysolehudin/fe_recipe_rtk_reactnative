@@ -8,7 +8,8 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {addRecipeAction} from '../redux/slices/recipe/addRecipeSlice';
 import {useDispatch} from 'react-redux';
-import {launchImageLibrary} from 'react-native-image-picker';
+import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-picker';
 
 const AddRecipeScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -46,6 +47,25 @@ const AddRecipeScreen = ({navigation}) => {
         console.log('user cancelled');
       } else if (response.error) {
         console.log('launchImageLibrary Error: ', response.error);
+      } else {
+        const data = response.assets[0];
+        console.log(data);
+        setImage(data);
+      }
+    });
+  };
+
+  const handleOpenCamera = async () => {
+    const options = {
+      mediaType: 'photo',
+      quality: 1,
+    };
+
+    launchCamera(options, response => {
+      if (response.didCancel) {
+        console.log('user cancelled');
+      } else if (response.error) {
+        console.log('launchCamera Error: ', response.error);
       } else {
         const data = response.assets[0];
         console.log(data);
@@ -121,7 +141,7 @@ const AddRecipeScreen = ({navigation}) => {
           <View
             style={{
               height: 100,
-              backgroundColor: image.uri ? 'transparent' : 'white',
+              backgroundColor: image?.uri ? 'transparent' : 'white',
               borderRadius: 10,
               justifyContent: 'center',
               alignItems: 'center',
@@ -163,6 +183,7 @@ const AddRecipeScreen = ({navigation}) => {
           }}>
           <TouchableOpacity
             activeOpacity={0.7}
+            onPress={handleOpenGallery}
             style={{
               backgroundColor: colors.grayishBlue,
               borderRadius: 10,
@@ -177,6 +198,7 @@ const AddRecipeScreen = ({navigation}) => {
 
           <TouchableOpacity
             activeOpacity={0.7}
+            onPress={handleOpenCamera}
             style={{
               backgroundColor: colors.grayishBlue,
               borderRadius: 10,
