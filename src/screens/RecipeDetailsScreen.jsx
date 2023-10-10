@@ -2,16 +2,44 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {NativeBaseProvider, TextArea} from 'native-base';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import React, {useState} from 'react';
-import {dataRecipeDetails} from '../dummy/detailResep';
+import React, {useEffect, useState} from 'react';
 import {colors} from '../assets/style/colors';
+import {REACT_NATIVE_BACKEND_URL} from '../../env';
+import NoResult from '../components/Global/NoResult';
+import Alert from '../components/Global/Alert';
+import http from '../helpers/http';
+import {splitSentencesToPoints} from '../utils/splitSentencesToPoints';
 
 const RecipeDetailsScreen = ({route}) => {
   const id = route?.params?.id || 1;
-  console.log(id);
   const [activeTab, setActiveTab] = useState('ingredients');
+  const [dataRecipeDetails, setDataRecipeDetails] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-  const data = dataRecipeDetails.data;
+  const data = dataRecipeDetails;
+
+  useEffect(() => {
+    getDataRecipeDetails(id);
+  }, []);
+
+  const getDataRecipeDetails = async id => {
+    setIsLoading(true);
+
+    try {
+      const result = await http().get(
+        `${REACT_NATIVE_BACKEND_URL}/recipe/${id}`,
+      );
+
+      setDataRecipeDetails(result.data.data[0]);
+      setIsLoading(false);
+    } catch (error) {
+      setIsError(true);
+      setIsLoading(false);
+    }
+  };
+
+  const ingredients = splitSentencesToPoints(dataRecipeDetails?.ingredients);
 
   return (
     <ScrollView>
@@ -19,8 +47,10 @@ const RecipeDetailsScreen = ({route}) => {
         style={{
           backgroundColor: 'white',
         }}>
-        {data.map((item, index) => (
-          <View key={index}>
+        {isLoading ? (
+          <Alert type={'loading'} />
+        ) : (
+          <View>
             <View
               style={{
                 position: 'relative',
@@ -28,7 +58,7 @@ const RecipeDetailsScreen = ({route}) => {
               <View>
                 <Image
                   style={{width: '100%', height: 442}}
-                  source={{uri: item.image}}
+                  source={{uri: data?.image}}
                   alt="recipe"
                   resizeMode="cover"
                 />
@@ -50,7 +80,7 @@ const RecipeDetailsScreen = ({route}) => {
                 <FeatherIcon style={styles.buttonLike} name="thumbs-up" />
               </TouchableOpacity>
 
-              <Text style={styles.recipeTitle}>{item.title}</Text>
+              <Text style={styles.recipeTitle}>{data.title}</Text>
               <Text style={styles.creatorName}>By Chef Ronald Humson</Text>
               <View
                 style={{
@@ -99,9 +129,16 @@ const RecipeDetailsScreen = ({route}) => {
               {activeTab === 'ingredients' && (
                 <View style={styles.tabContentIngredients}>
                   <View style={styles.recipeIngredients}>
-                    <Text style={{padding: 20, fontSize: 14, color: '#666666'}}>
-                      {item.ingredients}
-                    </Text>
+                    {ingredients?.length > 0 &&
+                      ingredients?.map((item, index) => {
+                        return (
+                          <Text
+                            key={index}
+                            style={{fontSize: 14, color: '#666666'}}>
+                            - {item}
+                          </Text>
+                        );
+                      })}
                   </View>
                 </View>
               )}
@@ -128,66 +165,7 @@ const RecipeDetailsScreen = ({route}) => {
                       Step 1
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.buttonVideoStep}>
-                    <View style={styles.iconPlay}>
-                      <FeatherIcon
-                        style={{
-                          color: 'white',
-                          fontSize: 24,
-                        }}
-                        name="play"
-                      />
-                    </View>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: 'bold',
-                        color: colors.grayB6,
-                        marginTop: 10,
-                      }}>
-                      Step 2
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.buttonVideoStep}>
-                    <View style={styles.iconPlay}>
-                      <FeatherIcon
-                        style={{
-                          color: 'white',
-                          fontSize: 24,
-                        }}
-                        name="play"
-                      />
-                    </View>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: 'bold',
-                        color: colors.grayB6,
-                        marginTop: 10,
-                      }}>
-                      Step 3
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.buttonVideoStep}>
-                    <View style={styles.iconPlay}>
-                      <FeatherIcon
-                        style={{
-                          color: 'white',
-                          fontSize: 24,
-                        }}
-                        name="play"
-                      />
-                    </View>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: 'bold',
-                        color: colors.grayB6,
-                        marginTop: 10,
-                      }}>
-                      Step 4
-                    </Text>
-                  </TouchableOpacity>
+
                   <NativeBaseProvider>
                     <TextArea
                       h="150"
@@ -245,7 +223,7 @@ const RecipeDetailsScreen = ({route}) => {
               )}
             </View>
           </View>
-        ))}
+        )}
       </View>
     </ScrollView>
   );
@@ -332,6 +310,7 @@ const styles = StyleSheet.create({
     width: 319,
     height: 'auto',
     backgroundColor: '#FAF7ED',
+    padding: 20,
   },
   buttonVideoStep: {
     backgroundColor: '#FAF7ED',

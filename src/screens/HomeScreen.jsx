@@ -1,5 +1,5 @@
 import {SafeAreaView, SectionList, StyleSheet} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import BottomTabs from '../components/Global/BottomTabs';
 import PopularForYouSection from '../components/Home/PopularForYouSection';
 import NewRecipeSection from '../components/Home/NewRecipeSection';
