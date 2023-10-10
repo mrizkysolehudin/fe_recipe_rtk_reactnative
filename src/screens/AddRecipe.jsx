@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Button, Image, Input, Text, TextArea, View} from 'native-base';
 import {StyleSheet, SafeAreaView} from 'react-native';
 import {colors} from '../assets/style/colors';
@@ -9,7 +9,6 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {addRecipeAction} from '../redux/slices/recipe/addRecipeSlice';
 import {useDispatch} from 'react-redux';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
-import ImagePicker from 'react-native-image-picker';
 
 const AddRecipeScreen = ({navigation}) => {
   const dispatch = useDispatch();
@@ -18,7 +17,6 @@ const AddRecipeScreen = ({navigation}) => {
   const [ingredients, setIngredients] = useState('');
   const [video, setVideo] = useState('');
   const [image, setImage] = useState(null);
-  const [showImage, setShowImage] = useState('');
 
   const handleSubmit = async () => {
     let data = {
@@ -26,10 +24,10 @@ const AddRecipeScreen = ({navigation}) => {
       ingredients,
       video,
       image: {
-        uri: image.uri ?? '',
-        type: image.type ?? '',
-        name: image.fileName ?? '',
-        fileSize: image.fileSize ?? '',
+        uri: image?.uri ?? '',
+        type: image?.type ?? '',
+        name: image?.fileName ?? '',
+        fileSize: image?.fileSize ?? '',
       },
     };
 

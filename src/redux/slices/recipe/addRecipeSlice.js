@@ -11,7 +11,12 @@ export const addRecipeAction = createAsyncThunk(
     const {token, user_id} = getState().userAuth;
 
     try {
-      if (data.title === '' || data.ingredients === '' || data.video === '') {
+      if (
+        data.title === '' ||
+        data.ingredients === '' ||
+        data.video === '' ||
+        data?.image?.uri === ''
+      ) {
         Toast.show({
           title: 'Please, input all data',
           placement: 'top',
