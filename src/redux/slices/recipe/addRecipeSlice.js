@@ -49,7 +49,7 @@ export const addRecipeAction = createAsyncThunk(
       formData.append('user_id', user_id);
       formData.append('title', data?.title);
       formData.append('ingredients', data?.ingredients);
-      formData.append('video', data?.video);
+      formData.append('video', data?.video.uri);
       formData.append('image', data?.image);
 
       const response = await http(token).post(

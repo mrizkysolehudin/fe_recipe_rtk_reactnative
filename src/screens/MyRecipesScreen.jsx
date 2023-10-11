@@ -108,6 +108,7 @@ const MyRecipesScreen = ({navigation}) => {
                 handlePress={handlePress}
                 withActionButton
                 handleDelete={handleDelete}
+                navigation={navigation}
               />
             )}
             showsVerticalScrollIndicator={false}

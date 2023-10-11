@@ -2,7 +2,13 @@ import {Button, Image, Text, View} from 'native-base';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 
-const CardItem = ({item, handlePress, withActionButton, handleDelete}) => {
+const CardItem = ({
+  item,
+  handlePress,
+  withActionButton,
+  handleDelete,
+  navigation,
+}) => {
   return (
     <TouchableOpacity
       onPress={() => handlePress(item?.recipe_id)}
@@ -47,7 +53,13 @@ const CardItem = ({item, handlePress, withActionButton, handleDelete}) => {
 
       {withActionButton && (
         <View style={{gap: 4}}>
-          <Button bgColor="#0284c7" py={1} fontWeight={'bold'}>
+          <Button
+            onPress={() =>
+              navigation.navigate('EditRecipe', {id: item?.recipe_id})
+            }
+            bgColor="#0284c7"
+            py={1}
+            fontWeight={'bold'}>
             Edit
           </Button>
           <Button
