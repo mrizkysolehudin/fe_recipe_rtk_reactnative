@@ -2,6 +2,7 @@ import {createAction, createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import http from '../../../helpers/http';
 import {REACT_NATIVE_BACKEND_URL} from '../../../../env';
 import {Toast} from 'native-base';
+import {getOneUserAction} from './getOneUser';
 
 const resetEditUser = createAction('user/reset/editUser');
 
@@ -42,6 +43,7 @@ export const editUserAction = createAsyncThunk(
           placement: 'top',
         });
 
+        dispatch(getOneUserAction(user_id));
         navigation.navigate('Profile');
         dispatch(resetEditUser());
       }
