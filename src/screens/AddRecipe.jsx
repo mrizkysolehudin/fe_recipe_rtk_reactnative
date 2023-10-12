@@ -27,6 +27,9 @@ const AddRecipeScreen = ({navigation}) => {
         ? video
         : {
             uri: video?.uri ?? '',
+            type: video?.type ?? '',
+            name: video?.fileName ?? '',
+            fileSize: video?.fileSize ?? '',
           },
       image: {
         uri: image?.uri ?? '',
@@ -35,7 +38,6 @@ const AddRecipeScreen = ({navigation}) => {
         fileSize: image?.fileSize ?? '',
       },
     };
-    console.log(data);
 
     dispatch(addRecipeAction({data, navigation}));
   };
@@ -81,6 +83,8 @@ const AddRecipeScreen = ({navigation}) => {
   const handleOpenCameraVideo = async () => {
     const options = {
       mediaType: 'video',
+      includeBase64: false,
+      saveToPhotos: true,
     };
 
     launchCamera(options, response => {
@@ -90,10 +94,8 @@ const AddRecipeScreen = ({navigation}) => {
         console.log('launchCamera Error: ', response.error);
       } else {
         const data = response.assets[0];
-        console.log(data);
-        setVideo({
-          uri: data.uri,
-        });
+        console.log('dataaaaaa', data);
+        setVideo(data);
       }
     });
   };

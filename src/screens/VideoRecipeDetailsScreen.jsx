@@ -95,7 +95,7 @@ const VideoRecipeDetailsScreen = ({route, navigation}) => {
               {formatDate(recipe?.created_at)}
             </Text>
           </View>
-        ) : recipe?.video?.startsWith('https://res') ? (
+        ) : recipe?.video?.startsWith('https://res.cloudinary.com/') ? (
           <View
             style={{
               width: '100%',
@@ -145,11 +145,13 @@ const VideoRecipeDetailsScreen = ({route, navigation}) => {
         </Text>
 
         <View style={{gap: 20, marginTop: 10, marginBottom: 20}}>
-          {AllRecipes.length > 0
-            ? AllRecipes?.slice(0, 3)?.map((item, index) => (
-                <CardItem item={item} />
-              ))
-            : ''}
+          {AllRecipes.length > 0 ? (
+            AllRecipes?.slice(0, 3)?.map((item, index) => (
+              <CardItem item={item} />
+            ))
+          ) : (
+            <NoResult />
+          )}
         </View>
       </View>
     </ScrollView>

@@ -21,8 +21,6 @@ const EditRecipeScreen = ({navigation, route}) => {
   const [video, setVideo] = useState('');
   const [image, setImage] = useState(null);
 
-  console.log(currentRecipe);
-
   useEffect(() => {
     dispatch(getOneRecipeAction(id));
   }, [id, dispatch]);

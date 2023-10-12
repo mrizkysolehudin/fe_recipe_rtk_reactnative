@@ -14,7 +14,6 @@ export const addRecipeAction = createAsyncThunk(
       if (
         data.title === '' ||
         data.ingredients === '' ||
-        data.video === '' ||
         data?.image?.uri === ''
       ) {
         Toast.show({
@@ -49,7 +48,11 @@ export const addRecipeAction = createAsyncThunk(
       formData.append('user_id', user_id);
       formData.append('title', data?.title);
       formData.append('ingredients', data?.ingredients);
-      formData.append('video', data?.video.uri);
+      if (data?.video?.uri) {
+        formData.append('video', data?.video);
+      } else {
+        formData.append('video', data?.video?.uri);
+      }
       formData.append('image', data?.image);
 
       const response = await http(token).post(
@@ -68,6 +71,7 @@ export const addRecipeAction = createAsyncThunk(
 
       dispatch(resetAddRecipe());
     } catch (error) {
+      console.log(error);
       Toast.show({
         title: 'Add recipe fail.',
         placement: 'top',
