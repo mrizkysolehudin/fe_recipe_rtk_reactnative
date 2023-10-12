@@ -16,6 +16,7 @@ import PrivateRoute from '../components/Global/PrivateRoute';
 import SearchRecipeScreen from '../screens/SearchRecipeScreen';
 import AddRecipeScreen from '../screens/AddRecipe';
 import EditRecipeScreen from '../screens/EditRecipeScreen';
+import VideoRecipeDetailsScreen from '../screens/VideoRecipeDetailsScreen';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,13 @@ const Routes = () => {
         <Stack.Screen
           name="Login"
           component={LoginScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="VideoRecipeDetails"
+          component={VideoRecipeDetailsScreen}
           options={{
             headerShown: false,
           }}

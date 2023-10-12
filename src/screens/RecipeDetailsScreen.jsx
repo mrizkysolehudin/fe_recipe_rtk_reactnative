@@ -5,12 +5,11 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import React, {useEffect, useState} from 'react';
 import {colors} from '../assets/style/colors';
 import {REACT_NATIVE_BACKEND_URL} from '../../env';
-import NoResult from '../components/Global/NoResult';
 import Alert from '../components/Global/Alert';
 import http from '../helpers/http';
 import {splitSentencesToPoints} from '../utils/splitSentencesToPoints';
 
-const RecipeDetailsScreen = ({route}) => {
+const RecipeDetailsScreen = ({route, navigation}) => {
   const id = route?.params?.id || 1;
   const [activeTab, setActiveTab] = useState('ingredients');
   const [dataRecipeDetails, setDataRecipeDetails] = useState([]);
@@ -145,7 +144,11 @@ const RecipeDetailsScreen = ({route}) => {
 
               {activeTab === 'videoStep' && (
                 <View style={styles.tabContentVideoStep}>
-                  <TouchableOpacity style={styles.buttonVideoStep}>
+                  <TouchableOpacity
+                    style={styles.buttonVideoStep}
+                    onPress={() =>
+                      navigation.navigate('VideoRecipeDetails', {id})
+                    }>
                     <View style={styles.iconPlay}>
                       <FeatherIcon
                         style={{
