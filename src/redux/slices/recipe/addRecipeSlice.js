@@ -36,6 +36,7 @@ export const addRecipeAction = createAsyncThunk(
         return rejectWithValue('File must be a .png, .jpg, or .jpeg');
       }
 
+      // maksimal size 2 mb
       if (data.image.fileSize > 2_097_152) {
         Toast.show({
           title: 'File size should be less than 2MB',

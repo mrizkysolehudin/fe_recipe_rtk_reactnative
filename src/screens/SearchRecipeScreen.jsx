@@ -99,11 +99,9 @@ const SearchRecipeScreen = ({route, navigation}) => {
           <NoResult />
         )}
       </View>
-      {searchData?.length > 0 && (
-        <View>
-          <Pagination pagination={pagination} setPage={setPage} page={page} />
-        </View>
-      )}
+      <View>
+        <Pagination pagination={pagination} setPage={setPage} page={page} />
+      </View>
 
       <BottomTabs />
     </View>
