@@ -18,6 +18,7 @@ const RecipeDetailsScreen = ({route, navigation}) => {
 
   const data = dataRecipeDetails;
 
+  console.log(data);
   useEffect(() => {
     getDataRecipeDetails(id);
   }, []);
@@ -80,7 +81,6 @@ const RecipeDetailsScreen = ({route, navigation}) => {
               </TouchableOpacity>
 
               <Text style={styles.recipeTitle}>{data.title}</Text>
-              <Text style={styles.creatorName}>By Chef Ronald Humson</Text>
               <View
                 style={{
                   width: '100%',
@@ -210,7 +210,7 @@ const RecipeDetailsScreen = ({route, navigation}) => {
                             borderRadius: 27,
                           }}
                           source={{
-                            uri: 'https://res.cloudinary.com/dskltx6xi/image/upload/v1694509756/mama_recipe/users/blank_dd1daa.png',
+                            uri: 'https://res.cloudinary.com/dskltx6xi/image/upload/v1698234979/peworld/users/dder_vvkcto.jpg',
                           }}
                         />
                         <View style={{width: 250, height: 'auto'}}>
