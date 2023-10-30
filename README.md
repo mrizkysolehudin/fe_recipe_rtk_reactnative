@@ -2,7 +2,7 @@
  <img height="150" width="250" src="https://github.com/mrizkysolehudin/fe-recipe-rtk/blob/master/public/assets/images/logo-bgyellow.png"  />
 </div>
 
-# Recipe Web Application
+# Recipe Mobile Application
 
 Recipe Application, the best platform for uncovering a variety of delicious recipes and satisfying your culinary cravings. We are dedicated to providing an unparalleled recipe exploration experience, allowing you to discover and share your culinary creations.
 
