@@ -33,6 +33,7 @@ export const addRecipeAction = createAsyncThunk(
           title: 'File must be a .png, .jpg, or .jpeg',
           placement: 'top',
         });
+        console.log('File size should be less than 2MB');
         return rejectWithValue('File must be a .png, .jpg, or .jpeg');
       }
 
@@ -42,6 +43,7 @@ export const addRecipeAction = createAsyncThunk(
           title: 'File size should be less than 2MB',
           placement: 'top',
         });
+        console.log('File size should be less than 2MB');
         return rejectWithValue('File size should be less than 2MB');
       }
 
