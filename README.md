@@ -78,6 +78,30 @@ Start the project
 
 ## Screenshots
 
+| Register Screen                                                                                                                         | Login Screen                                                                                                                      |
+| --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| ![Register Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/register-screen.jpg) | ![Login Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/login-screen.jpg) |
+
+| Landing Screen                                                                                                                      | Add Recipe Screen                                                                                                                  |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| ![Splash Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/splash-screen.jpg) | ![Landing Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/home-screen.jpg) |
+
+| Profile Screen                                                                                                                        | Edit Profile Screen                                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Profile Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/profile-screen.jpg) | ![Edit Profile Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/edit-profile-screen.jpg) |
+
+| Recipe Details Screen (Tab Ingredients)                                                                                                                                               | Recipe Details Screen (Tab Video Step)                                                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Recipe Details Screen (Tab Ingredients)](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/recipe-details-tab-ingredients-screen.jpg) | ![Recipe Details Screen (Tab Video Step)](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/recipe-details-tab-videostep-screen.jpg) |
+
+| Search Screen                                                                                                                       | Video Details Screen                                                                                                                              |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Search Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/search-screen.jpg) | ![Video Details Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/video-details-screen.jpg) |
+
+| Add Recipe Screen                                                                                                                           | Edit Recipe Screen                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![Add Recipe Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/add-recipe-screen.jpg) | ![Edit Recipe Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/edit-recipe-screen.jpg) |
+
 ## Author
 
 💻 [Muchammad Rizky Solehudin](https://github.com/mrizkysolehudin)
