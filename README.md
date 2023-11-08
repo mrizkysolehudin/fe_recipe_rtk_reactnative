@@ -91,9 +91,9 @@ Start the project
 | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | ![Register Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/register-screen.jpg) | ![Login Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/login-screen.jpg) |
 
-| Splash Screen                                                                                                                       | Home Screen                                                                                                                     |
-| ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| ![Splash Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/splash-screen.jpg) | ![Home Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/home-screen.jpg) |
+| Splash Screen                                                                                                                       | Home Screen                                                                                                               |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| ![Splash Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/splash-screen.jpg) | ![Home Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/home4.jpg) |
 
 | Profile Screen                                                                                                                        | Edit Profile Screen                                                                                                                             |
 | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -110,6 +110,10 @@ Start the project
 | Add Recipe Screen                                                                                                                           | Edit Recipe Screen                                                                                                                            |
 | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | ![Add Recipe Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/add-recipe-screen.jpg) | ![Edit Recipe Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/edit-recipe-screen.jpg) |
+
+| My Recipe Screen                                                                                                                   |
+| ---------------------------------------------------------------------------------------------------------------------------------- |
+| ![My Recipe Screen](https://github.com/mrizkysolehudin/fe_recipe_rtk_reactnative/blob/master/src/assets/screenshots/my-recipe.jpg) |
 
 ## Author
 
